@@ -66,7 +66,6 @@ export default function Home() {
     watch,
     setValue,
     storage: window.localStorage, // default window.sessionStorage
-    // exclude: ["baz"],
   });
 
   const values = form.watch();
@@ -110,7 +109,7 @@ export function Carousel({ values }: { values: z.infer<typeof FormSchema> }) {
         />
         <div className="flex flex-col">
           <span className="">Your Name</span>
-          <span className="">@your_linkedin_handle</span>
+          <span className="">@handle</span>
         </div>
       </CardFooter>
     </Card>
