@@ -21,16 +21,25 @@ import {
 } from "@/components/ui/form"
 import { Switch } from "@/components/ui/switch"
 import { Textarea } from "@/components/ui/textarea"
+import { Input } from "@/components/ui/input"
 import { toast } from "@/components/ui/use-toast"
 
 const FormSchema = z.object({
-  bio: z
+  title: z
     .string()
     .min(10, {
-      message: "Bio must be at least 10 characters.",
+      message: "Title must be at least 10 characters.",
     })
     .max(160, {
-      message: "Bio must not be longer than 30 characters.",
+      message: "Title must not be longer than 30 characters.",
+    }),
+  subtitle: z
+    .string()
+    .min(10, {
+      message: "Subtitle must be at least 10 characters.",
+    })
+    .max(160, {
+      message: "Subtitle must not be longer than 30 characters.",
     }),
 })
 
@@ -55,20 +64,34 @@ export function TextareaForm() {
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6">
         <FormField
           control={form.control}
-          name="bio"
+          name="title"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Bio</FormLabel>
+              <FormLabel>Title</FormLabel>
               <FormControl>
-                <Textarea
-                  placeholder="Tell us a little bit about yourself"
+                <Input
+                  placeholder="Your super cool title"
                   className="resize-none"
                   {...field}
                 />
               </FormControl>
-              <FormDescription>
-                You can <span>@mention</span> other users and organizations.
-              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="subtitle"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Subtitle</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="Subtitle for more clarity"
+                  className="resize-none"
+                  {...field}
+                />
+              </FormControl>
               <FormMessage />
             </FormItem>
           )}
