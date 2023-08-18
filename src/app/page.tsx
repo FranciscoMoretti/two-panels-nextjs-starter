@@ -76,7 +76,7 @@ export default function Home() {
 
 export function Carousel({ values }: { values: z.infer<typeof FormSchema> }) {
   return (
-    <Card className="w-[448px] h-[560px]">
+    <Card className="w-[448px] h-[560px] p-8">
       <CardHeader>
         <CardTitle>{values.title}</CardTitle>
         <CardDescription>{values.subtitle}</CardDescription>
