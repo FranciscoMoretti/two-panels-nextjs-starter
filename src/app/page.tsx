@@ -5,7 +5,7 @@ import Image from 'next/image'
 
 import Link from "next/link"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
+import { UseFormReturn, useForm } from "react-hook-form"
 import * as z from "zod"
 
 import { Button } from "@/components/ui/button"
@@ -43,11 +43,29 @@ const FormSchema = z.object({
     }),
 })
 
-export function TextareaForm() {
+
+export default function Home() {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
+    defaultValues: {
+      title: 'YOUR LINKEDIN CAROUSEL',
+      subtitle: 'Generated specially for you'
+    }
   })
 
+
+  return (
+    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      <div className="z-10 max-w-5xl items-stretch w-full gap-8 justify-between font-mono text-sm flex min-h-[450px]">
+        <div className="flex-1 border p-4 rounded shadow">HELLO WORLD</div>
+        <div className="flex-1 border p-4 rounded shadow"><TextareaForm form={form}/></div>
+      </div>
+    </main>
+  )
+}
+
+
+export function TextareaForm({form}: {form:  UseFormReturn<z.infer<typeof FormSchema>, any, undefined>}) {
   function onSubmit(data: z.infer<typeof FormSchema>) {
     toast({
       title: "You submitted the following values:",
@@ -61,7 +79,7 @@ export function TextareaForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-6">
         <FormField
           control={form.control}
           name="title"
@@ -71,7 +89,7 @@ export function TextareaForm() {
               <FormControl>
                 <Input
                   placeholder="Your super cool title"
-                  className="resize-none"
+                  className=""
                   {...field}
                 />
               </FormControl>
@@ -88,7 +106,7 @@ export function TextareaForm() {
               <FormControl>
                 <Input
                   placeholder="Subtitle for more clarity"
-                  className="resize-none"
+                  className=""
                   {...field}
                 />
               </FormControl>
@@ -102,14 +120,3 @@ export function TextareaForm() {
   )
 }
 
-
-export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl items-stretch w-full gap-8 justify-between font-mono text-sm flex min-h-[450px]">
-        <div className="flex-1 border">HELLO WORLD</div>
-        <div className="flex-1 border"><TextareaForm/></div>
-      </div>
-    </main>
-  )
-}
