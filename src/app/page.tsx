@@ -23,6 +23,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import useFormPersist from "react-hook-form-persist";
+import { Textarea } from "@/components/ui/textarea";
 
 const FormSchema = z.object({
   title: z
@@ -41,6 +42,7 @@ const FormSchema = z.object({
     .max(160, {
       message: "Subtitle must not be longer than 30 characters.",
     }),
+  description: z.string(),
 });
 
 export default function Home() {
@@ -49,6 +51,8 @@ export default function Home() {
     defaultValues: {
       title: "YOUR TITLE",
       subtitle: "Your awesome subtitle",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, dolorum.",
     },
   });
 
@@ -84,11 +88,7 @@ export function Carousel({ values }: { values: z.infer<typeof FormSchema> }) {
         <CardDescription>{values.subtitle}</CardDescription>
       </CardHeader>
       <CardContent>
-        <span className="">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit
-          eligendi dolorem consectetur sit sequi. Saepe repellendus perferendis
-          iure laborum esse!
-        </span>
+        <span className="">{values.description}</span>
       </CardContent>
       <CardFooter className="flex justify-start gap-3 ">
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -152,6 +152,23 @@ export function TextareaForm({
                 <Input
                   placeholder="Subtitle for more clarity"
                   className=""
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="description"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Bio</FormLabel>
+              <FormControl>
+                <Textarea
+                  placeholder="Tell us a little bit about yourself"
+                  className="resize-none"
                   {...field}
                 />
               </FormControl>
