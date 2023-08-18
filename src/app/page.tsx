@@ -29,6 +29,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { useMemo } from "react";
+import useFormPersist from "react-hook-form-persist";
 
 const FormSchema = z.object({
   title: z
@@ -56,6 +58,15 @@ export default function Home() {
       title: "YOUR LINKEDIN CAROUSEL",
       subtitle: "Generated specially for you",
     },
+  });
+
+  const { watch, setValue } = form;
+
+  useFormPersist("storageKey", {
+    watch,
+    setValue,
+    storage: window.localStorage, // default window.sessionStorage
+    // exclude: ["baz"],
   });
 
   const values = form.watch();
