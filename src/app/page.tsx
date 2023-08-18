@@ -72,11 +72,11 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl items-stretch justify-center w-full gap-8 font-mono text-sm flex ">
-        <div className="flex-1 border p-4 rounded shadow flex flex-col items-center ">
+      <div className="z-10 max-w-5xl grid grid-cols-1 xl:grid-cols-2 gap-8 font-mono text-sm ">
+        <div className="col-span-1 border p-4 rounded shadow flex flex-col items-center ">
           <Carousel values={values} />
         </div>
-        <div className="flex-1 border p-4 rounded shadow">
+        <div className="col-span-1 border p-4 rounded shadow">
           <TextareaForm form={form} />
         </div>
       </div>
@@ -86,7 +86,7 @@ export default function Home() {
 
 export function Carousel({ values }: { values: z.infer<typeof FormSchema> }) {
   return (
-    <Card className="w-[448px] h-[560px] p-8">
+    <Card className="m-w-[448px] m-h-[560px] w-full aspect-[4/5] p-8">
       <CardHeader>
         <CardTitle>{values.title}</CardTitle>
         <CardDescription>{values.subtitle}</CardDescription>
@@ -134,10 +134,7 @@ export function TextareaForm({
 
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-6 w-[350px]"
-      >
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 w-full">
         <FormField
           control={form.control}
           name="title"
