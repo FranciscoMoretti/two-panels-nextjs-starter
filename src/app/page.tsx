@@ -1,26 +1,19 @@
 "use client";
-import Image from "next/image";
-import Link from "next/link";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UseFormReturn, useForm } from "react-hook-form";
 import * as z from "zod";
 
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Switch } from "@/components/ui/switch";
-import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
-import { watch } from "fs";
 import {
   Card,
   CardContent,
@@ -29,7 +22,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { useMemo } from "react";
 import useFormPersist from "react-hook-form-persist";
 
 const FormSchema = z.object({
@@ -55,8 +47,8 @@ export default function Home() {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      title: "YOUR LINKEDIN CAROUSEL",
-      subtitle: "Generated specially for you",
+      title: "YOUR TITLE",
+      subtitle: "Your awesome subtitle",
     },
   });
 
@@ -86,20 +78,18 @@ export default function Home() {
 
 export function Carousel({ values }: { values: z.infer<typeof FormSchema> }) {
   return (
-    <Card className="m-w-[448px] m-h-[560px] w-full aspect-[4/5] p-8">
+    <Card className="m-w-[448px] m-h-[560px] w-full aspect-[4/5] p-8 flex flex-col justify-between">
       <CardHeader>
         <CardTitle>{values.title}</CardTitle>
         <CardDescription>{values.subtitle}</CardDescription>
       </CardHeader>
-      {values.content && (
-        <CardContent>
-          <span className="">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit
-            eligendi dolorem consectetur sit sequi. Saepe repellendus
-            perferendis iure laborum esse!
-          </span>
-        </CardContent>
-      )}
+      <CardContent>
+        <span className="">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit
+          eligendi dolorem consectetur sit sequi. Saepe repellendus perferendis
+          iure laborum esse!
+        </span>
+      </CardContent>
       <CardFooter className="flex justify-start gap-3 ">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
